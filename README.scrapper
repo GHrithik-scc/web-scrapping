@@ -1,0 +1,57 @@
+# Books to Scrape — Parsel Web Scraper
+
+This project scrapes 120 books from books.toscrape.com using Python, requests,
+and Parsel. 
+
+## Fields collected
+
+- Book title
+- Price
+- Availability
+- Rating
+- Category
+- Product-page URL
+
+## Tools used
+
+- Google Colab
+- Python
+- requests
+- Parsel
+- CSV
+
+## How to run
+
+1. Open the notebook in Google Colab.
+2. Run:
+
+```python
+!pip install requests parsel
+```
+
+3. Run the scraper cell.
+4. The script creates and downloads `books.csv`.
+
+## Approach
+
+The scraper starts from the first catalogue page, extracts book data from each
+`article.product_pod` element, and follows the “Next” pagination link until it
+collects 120 unique books.
+
+Since category is not available on the catalogue page, the scraper visits each
+product page and extracts the category from the breadcrumb navigation.
+
+## Error handling
+
+- HTTP request retries
+- Request timeout
+- Duplicate URL removal
+- Missing-field handling
+- One-second delay between requests
+- Progress logging
+
+## Challenge
+
+The category is only available on individual product pages, so each product URL
+had to be visited separately. Relative links were converted to absolute URLs
+using `urljoin`.
